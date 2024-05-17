@@ -1,10 +1,14 @@
+// SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.19;
 
 import {ERC20} from "solmate/tokens/ERC20.sol";
 import {Owned} from "solmate/auth/Owned.sol";
 
 contract UniswapV4ERC20 is ERC20, Owned {
-    constructor(string memory name, string memory symbol) ERC20(name, symbol, 18) Owned(msg.sender) {}
+    constructor(
+        string memory name_,
+        string memory symbol_
+    ) ERC20(name_, symbol_, 18) Owned(msg.sender) {}
 
     function mint(address account, uint256 amount) external onlyOwner {
         _mint(account, amount);

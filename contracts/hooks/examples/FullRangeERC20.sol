@@ -23,7 +23,7 @@ import {Strings} from "@openzeppelin/contracts/utils/Strings.sol";
 
 import "../../libraries/LiquidityAmounts.sol";
 
-contract FullRange is BaseHook, ILockCallback {
+contract FullRangeERC20 is BaseHook, ILockCallback {
     using CurrencyLibrary for Currency;
     using PoolIdLibrary for PoolKey;
     using SafeCast for uint256;
@@ -216,7 +216,7 @@ contract FullRange is BaseHook, ILockCallback {
 
         poolInfo[poolId] = PoolInfo({hasAccruedFees: false, liquidityToken: poolToken});
 
-        return FullRange.beforeInitialize.selector;
+        return FullRangeERC20.beforeInitialize.selector;
     }
 
     function beforeAddLiquidity(
@@ -227,7 +227,7 @@ contract FullRange is BaseHook, ILockCallback {
     ) external view override returns (bytes4) {
         if (sender != address(this)) revert SenderMustBeHook();
 
-        return FullRange.beforeAddLiquidity.selector;
+        return FullRangeERC20.beforeAddLiquidity.selector;
     }
 
     function beforeSwap(address, PoolKey calldata key, IPoolManager.SwapParams calldata, bytes calldata)
